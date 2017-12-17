@@ -14,7 +14,19 @@ class Normalizer:
         '"': '',
         '\'': '',
         ' ': '_',
-        '.': '_',
+        '’': '',
+        '”': '',
+        '“': '',
+        '(': '_',
+        ')': '_',
+        '[': '_',
+        ']': '_',
+        '_mp3': '.mp3',
+        '_flac': '.flac',
+        '_ogg': '.ogg',
+        '_opus': '.opus',
+        '_m4a': '.m4a',
+        '_mkv': '.mkv',
         }
 
     for old, new in replacements.items():
@@ -37,17 +49,25 @@ class Normalizer:
     return name != self.normalize(name)
 
 
+def dry_run(normalizer, files):
+    for f in files:
+      if f != normalizer.normalize(f):
+        print('old name: ' + f)
+        print('new name: ' + normalizer.normalize(f))
+
+def real_run(normalizer, files, dirname):
+  for f in files:
+    realname = dirname + '/' + f
+    if normalizer.needs_normalizing(f):
+      os.rename(realname, normalizer.normalize(realname))
+
 if __name__ == '__main__':
   normalizer = Normalizer()
   dirname = sys.argv[1]
-  dry_run = len(sys.argv) > 2 and sys.argv[2] == '--dry-run'
+  dry_run_opt = '--dry-run' in sys.argv
+
   files = normalizer.get_files(dirname)
-  if dry_run:
-    for f in files:
-      print('old name: ' + f)
-      print('new name: ' + normalizer.normalize(f))
+  if dry_run_opt:
+    dry_run(normalizer, files)
   else:
-    for f in files:
-      realname = dirname + '/' + f
-      if normalizer.needs_normalizing(f):
-        os.rename(realname, normalizer.normalize(realname))
+    real_run(normalizer, files, dirname)
