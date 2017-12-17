@@ -21,12 +21,6 @@ class Normalizer:
         ')': '_',
         '[': '_',
         ']': '_',
-        '_mp3': '.mp3',
-        '_flac': '.flac',
-        '_ogg': '.ogg',
-        '_opus': '.opus',
-        '_m4a': '.m4a',
-        '_mkv': '.mkv',
         }
 
     for old, new in replacements.items():

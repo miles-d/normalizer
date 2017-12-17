@@ -51,11 +51,3 @@ class NormalizerTest(unittest.TestCase):
 
   def test_does_not_mutilate_extension(self):
     self.assertEqual('foo_bar.mp3', self.normalizer.normalize('foo bar.mp3'))
-
-  def test_restores_broken_extension(self):
-    self.assertEqual('foo_bar.mp3', self.normalizer.normalize('foo_bar_mp3'))
-    self.assertEqual('foo_bar.flac', self.normalizer.normalize('foo_bar_flac'))
-    self.assertEqual('foo_bar.ogg', self.normalizer.normalize('foo_bar_ogg'))
-    self.assertEqual('foo_bar.opus', self.normalizer.normalize('foo_bar_opus'))
-    self.assertEqual('foo_bar.m4a', self.normalizer.normalize('foo_bar_m4a'))
-    self.assertEqual('foo_bar.mkv', self.normalizer.normalize('foo_bar_mkv'))
