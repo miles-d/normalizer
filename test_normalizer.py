@@ -20,6 +20,10 @@ class NormalizerTest(unittest.TestCase):
     self.assertEqual('_foobar_', self.normalizer.normalize('(foobar)'))
     self.assertEqual('_foobar_', self.normalizer.normalize('[foobar]'))
 
+  def test_replaces_characters(self):
+    self.assertEqual('band_song', self.normalizer.normalize('band_-_song'))
+    self.assertEqual('band_song', self.normalizer.normalize('band__song'))
+
   def test_only_normalizes_basename(self):
     self.assertEqual('one two/three_four', self.normalizer.normalize('one two/three four'))
 

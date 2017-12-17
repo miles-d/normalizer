@@ -21,6 +21,8 @@ class Normalizer:
         ')': '_',
         '[': '_',
         ']': '_',
+        '_-_': '_',
+        '__': '_',
         }
 
     for old, new in replacements.items():
