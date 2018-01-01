@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os, sys
 
 class Normalizer:
@@ -22,7 +24,10 @@ class Normalizer:
         '[': '_',
         ']': '_',
         '_-_': '_',
+        ' - ': '_',
         '__': '_',
+        '._': '_',
+        '_--_': '_',
         }
 
     for old, new in replacements.items():

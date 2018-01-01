@@ -33,3 +33,7 @@ class NormalizerTest(unittest.TestCase):
 
   def test_does_not_mutilate_extension(self):
     self.assertEqual('foo_bar.mp3', self.normalizer.normalize('foo bar.mp3'))
+
+  def test_replaces_some_sequences(self):
+    self.assertEqual('1_foo', self.normalizer.normalize('1._foo'))
+    self.assertEqual('foo_bar', self.normalizer.normalize('foo_--_bar'))
